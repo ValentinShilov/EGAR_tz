@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="/css/style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реестр документов</title>
+</head>
+<body>
+<h1>Реестр документов</h1>
+
+<select id="filterSelect">
+    <option value="type">Тип документа</option>
+    <option value="id">ID</option>
+</select>
+
+<input type="text" id="filterInput" placeholder="Значение для фильтрации...">
+<button id="filterButton">Применить фильтр</button>
+<button id="resetFilterButton">Сбросить фильтр</button>
+
+<table>
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Тип</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="document : ${documents}" class="editDocument" >
+        <td th:text="${document.id}"></td>
+        <td th:text="${document.name}"></td>
+        <td th:text="${document.type}"></td>
+        <td th:text="${document.date}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<button onclick="openWindow()" id="addEditButton">Добавить информацию о документе</button>
+<div id="popupWindow" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeWindow()">&times;</span>
+        <!-- Здесь можно разместить форму для добавления/редактирования информации о документе -->
+        <h2>Форма для добавления информации</h2>
+        <input id="documentName" type="text" placeholder="Название документа">
+        <input id="documentType" type="text" placeholder="Тип документа">
+        <button onclick="saveDocument()">Сохранить</button>
+    </div>
+</div>
+
+<div id="popupWindow1" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeWindow()">&times;</span>
+        <h2>Форма для редактирования информации</h2>
+        <input id="documentId1" type="text" placeholder="ID" disabled>
+        <input id="documentName1" type="text" placeholder="Новое название">
+        <input id="documentType1" type="text" placeholder="Тип документа">
+        <button onclick="updateDocument()">Сохранить</button>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>
